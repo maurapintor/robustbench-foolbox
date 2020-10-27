@@ -13,7 +13,7 @@ model_url = 'https://github.com/maurapintor/robustbench-foolbox'
 model_name = 'Carmon2019Unlabeled'
 norm = 'Linf'
 fmodel = fb.zoo.get_model(model_url,
-                          module_name='load_model', 
+                          module_name='foolbox_robustbench', 
                           model_name=model_name, norm=norm)
 samples, labels = fb.samples(fmodel, dataset='cifar10', batchsize=10)
 _, advs, success = fb.attacks.LinfPGD()(fmodel, samples, labels, epsilons=[8 / 255])
