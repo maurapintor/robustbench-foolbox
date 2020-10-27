@@ -1,3 +1,4 @@
+import logging
 import os
 
 import torch
@@ -5,6 +6,10 @@ from robustbench.utils import rm_substr_from_state_dict, download_gdrive
 
 
 def load_model_to_device(model_name, model_dir='./models', norm='Linf', device='cpu'):
+    if device == 'cuda' and not torch.cuda.is_available():
+        logging.warning("Device set to 'cuda', but cuda is not available. "
+                        "Switching to 'cpu'...")
+        device = 'cpu'
     from robustbench.model_zoo.models import model_dicts as all_models
     model_dir += '/{}'.format(norm)
     model_path = '{}/{}.pt'.format(model_dir, model_name)
