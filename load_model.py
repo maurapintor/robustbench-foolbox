@@ -5,7 +5,7 @@ import torch
 from robustbench.utils import rm_substr_from_state_dict, download_gdrive
 
 
-def load_model_to_device(model_name, model_dir='./models', norm='Linf', device='cpu'):
+def load_model_to_device(model_name, model_dir='./models', norm='Linf', device='cuda'):
     if device == 'cuda' and not torch.cuda.is_available():
         logging.warning("Device set to 'cuda', but cuda is not available. "
                         "Switching to 'cpu'...")
